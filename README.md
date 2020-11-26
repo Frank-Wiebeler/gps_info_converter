@@ -1,5 +1,5 @@
 # gps_info_converter
-This tool converts [gps:info](https://github.com/DKE-Data/agrirouter-interface-documentation/blob/develop/docs/tmt/gps.adoc) packages as received via [agrirouter](https://my-agrirouter.com/en/); e.g. vi [IO-Tool](https://io.my-agrirouter.com)
+This tool converts [gps:info](https://github.com/DKE-Data/agrirouter-interface-documentation/blob/develop/docs/tmt/gps.adoc) packages as received via [agrirouter](https://my-agrirouter.com/en/); e.g. via [IO-Tool](https://io.my-agrirouter.com)
 
 # Who's behind it
 
