@@ -1,4 +1,17 @@
 # gps_info_converter
-Convert the dke data format gps:info to kml
+This tool converts [gps:info](https://github.com/DKE-Data/agrirouter-interface-documentation/blob/develop/docs/tmt/gps.adoc) packages as received via [agrirouter](https://my-agrirouter.com/en/); e.g. vi [IO-Tool](https://io.my-agrirouter.com)
 
-The input file is provided via command line, the resulting file has the same name but the extension .kml 
+# Who's behind it
+
+![dev4Agriculture](assets/dev4Agriculture.png)
+
+Development by [dev4Agriculture](https://www.dev4Agriculture.de)
+
+
+# Standalone app
+
+You can create a standalone jar file from the code using this command
+
+```bash
+    mvn clean package
+```

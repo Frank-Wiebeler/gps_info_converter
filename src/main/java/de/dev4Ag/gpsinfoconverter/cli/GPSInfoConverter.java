@@ -1,10 +1,10 @@
-package de.dev4Ag.com.gps2kml.cli;
+package de.dev4Ag.gpsinfoconverter.cli;
 
 import agrirouter.technicalmessagetype.Gps;
 import com.google.protobuf.Timestamp;
-import de.dev4Ag.com.gps2kml.CSVLockedException;
-import de.dev4Ag.com.gps2kml.GPSNotFoundException;
-import de.dev4Ag.com.gps2kml.KMLLockedException;
+import de.dev4Ag.gpsinfoconverter.CSVLockedException;
+import de.dev4Ag.gpsinfoconverter.GPSNotFoundException;
+import de.dev4Ag.gpsinfoconverter.KMLLockedException;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -25,6 +25,7 @@ public class GPSInfoConverter {
   private static boolean sortData;
   private static boolean cleanData;
   private static String importfileName;
+  private static String floatSplitter =".";
   private static DateFormat df =  new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 
   public static class GPSListEntry implements  Comparable<GPSListEntry>{
@@ -147,24 +148,24 @@ public class GPSInfoConverter {
   public static String getCSVLine( GPSListEntry gpsListEntry){
     Date timeStampDate = new Date(gpsListEntry.timeStamp.getSeconds()*MILLISECONDS_TO_SECONDS);
     return df.format(timeStampDate) + ";" +
-      gpsListEntry.latitude  +";"+
-      gpsListEntry.longitude + ";" +
-      gpsListEntry.altitude * ALTITUDE_FACTOR + ";" +
+      Double.toString(gpsListEntry.latitude).replace(".",floatSplitter)  +";"+
+      Double.toString(gpsListEntry.longitude).replace(".",floatSplitter) + ";" +
+      Double.toString(gpsListEntry.altitude * ALTITUDE_FACTOR).replace(".",floatSplitter) + ";" +
       gpsListEntry.status.name() + ";" +
       gpsListEntry.numberOfSatellites + ";" +
-      gpsListEntry.pdop + ";" +
-      gpsListEntry.hdop + ";\n";
+      Double.toString(gpsListEntry.pdop).replace(".",floatSplitter) + ";" +
+      Double.toString(gpsListEntry.hdop).replace(".",floatSplitter) + ";\n";
   }
 
   public static String getRawCSVLine( GPSListEntry gpsListEntry){
     return gpsListEntry.timeStamp.getSeconds() + ";" +
-            gpsListEntry.latitude +";"+
-            gpsListEntry.longitude + ";" +
-            gpsListEntry.altitude + ";" +
-            gpsListEntry.status.name() + ";" +
-            gpsListEntry.numberOfSatellites + ";" +
-            gpsListEntry.pdop + ";" +
-            gpsListEntry.hdop + ";\n";
+      Double.toString(gpsListEntry.latitude).replace(".",floatSplitter) +";"+
+      Double.toString(gpsListEntry.longitude).replace(".",floatSplitter) + ";" +
+      gpsListEntry.altitude + ";" +
+      gpsListEntry.status.name() + ";" +
+      gpsListEntry.numberOfSatellites + ";" +
+      Double.toString(gpsListEntry.pdop).replace(".",floatSplitter) + ";" +
+      Double.toString(gpsListEntry.hdop).replace(".",floatSplitter) + ";\n";
   }
   public static void toCSV(List<GPSListEntry> gpsListEntryList, String fileName, boolean rawCSVData) throws IOException {
 
@@ -229,7 +230,11 @@ public class GPSInfoConverter {
       }
   }
 
-  public static void main(String[] args) {
+  public static void setSplitter(String splitter){
+    floatSplitter = splitter;
+  }
+
+  /*public static void main(String[] args) {
     importfileName = args[0];
 
     for( String argument : args){
@@ -255,6 +260,6 @@ public class GPSInfoConverter {
       System.out.println("Could not write CSV File. Is it locked (e.g. opened in Excel)?");
     }
 
-  }
+  }*/
 
 }

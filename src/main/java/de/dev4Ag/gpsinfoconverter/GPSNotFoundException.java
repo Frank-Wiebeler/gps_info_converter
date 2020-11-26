@@ -1,4 +1,4 @@
-package de.dev4Ag.com.gps2kml;
+package de.dev4Ag.gpsinfoconverter;
 
 public class GPSNotFoundException extends Exception {
 }
